@@ -10,7 +10,11 @@ Template.challenge.onCreated(function () {
   this.hasInteracted = new ReactiveVar(false);
 });
 
-Template.challenge.onRendered(function () {});
+Template.challenge.onRendered(function () {
+  setTimeout(() => {
+    document.getElementById("challenge").classList.remove("opacity-0");
+  }, 50);
+});
 
 Template.challenge.events({
   "keydown .challengeInput"(e) {

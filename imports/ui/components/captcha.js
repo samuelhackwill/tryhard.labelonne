@@ -10,3 +10,9 @@ Template.captcha.helpers({
     return __id;
   },
 });
+
+Template.captcha.onRendered(function () {
+  setTimeout(() => {
+    document.getElementById("captcha").classList.remove("opacity-0");
+  }, 50);
+});

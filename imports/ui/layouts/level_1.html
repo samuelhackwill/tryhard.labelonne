@@ -3,25 +3,17 @@
   consider using cmd+k s -->
 
   <div class="pageContainer flex w-full flex-wrap p-10">
-    {{#if state "initial"}}
-    <div class="flex h-20 items-center justify-center">{{> continuer}}</div>
-    {{/if}} {{#if state "acteI"}}
-    <div class="flex h-20 items-center justify-center">
-      {{>continuer}} {{> pasUnRobot}}
-    </div>
-    {{/if}} {{#if state "acteII"}}
-    <div class="flex h-20 items-center justify-center">
-      {{>continuer}} {{> pasUnRobot}}
-    </div>
-    {{>captcha theCaptcha}}
-    <div class="flex w-full items-center justify-center">
-      {{>challenge theCaptchaPlus}}
-    </div>
-    <div>{{initialDataLength}}</div>
-    {{/if}} {{#if state "acteIII"}}
-    <div class="flex h-20 items-center justify-center">
-      {{> continuer "acteIII"}}
-    </div>
-    {{/if}}
+      <div class="flex h-20 items-center justify-center">
+        {{> continuer}}
+          {{#unless isState "initial"}}
+            {{> pasUnRobot}}
+          {{/unless}}
+        </div>
+        {{#if isState "acteII"}}
+          {{>captcha theCaptcha}}
+          <div class="flex w-full items-center justify-center">
+            {{>challenge theCaptchaPlus}}
+          </div>
+        {{/if}}
   </div>
 </template>

@@ -3,7 +3,6 @@ import "../components/continuer.js";
 import "../components/pasUnRobot.js";
 import "../components/captcha.js";
 import "../components/challenge.js";
-
 import "../../api/captchas/captchas.js";
 
 import { PasUnRobotBeaten } from "../components/pasUnRobot.js";
@@ -38,7 +37,7 @@ Template.level_1.onRendered(function () {
 });
 
 Template.level_1.helpers({
-  state(name) {
+  isState(name) {
     const instance = Template.instance();
     return instance.state.get() == name;
   },
