@@ -1,9 +1,25 @@
 <template name="level_1">
+  <!-- beware that formating in here will break the fuken handlebars.
+  consider using cmd+k s -->
+
   <div
-    class="pageContainer flex h-[100vh] w-full items-start justify-start bg-gray-900 p-10"
+    class="pageContainer flex h-[100vh] w-full flex-wrap items-start justify-start p-10"
   >
-    <div class="flex items-center justify-center">
-      {{> continuer}} {{> pasUnRobot}}
+    {{#if state "initial"}}
+    <div class="flex h-20 items-center justify-center">{{> continuer}}</div>
+    {{/if}} {{#if state "acteI"}}
+    <div class="flex h-20 items-center justify-center">
+      {{>continuer}} {{> pasUnRobot}}
     </div>
+    {{/if}} {{#if state "acteII"}}
+    <div class="flex h-20 items-center justify-center">
+      {{>continuer}} {{> pasUnRobot}}
+    </div>
+    <div
+      class="flex h-[50vh] w-full items-center justify-center rounded border-4 border-red-600 bg-white"
+    >
+      {{>captcha "zib bon"}}
+    </div>
+    {{/if}}
   </div>
 </template>
