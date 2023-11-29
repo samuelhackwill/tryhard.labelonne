@@ -1,14 +1,16 @@
 import "./challenge.html";
 
-import { index } from "../pages/game_captcha.js";
-import { State } from "../layouts/feed.js";
+import { Index } from "../layouts/level_1.js";
 
 export const TotalKeyStrokes = new ReactiveVar(0);
 export const TotalCompletedChars = new ReactiveVar(0);
+export const Captcha1Beaten = new ReactiveVar(false);
 
 Template.challenge.onCreated(function () {
   this.hasInteracted = new ReactiveVar(false);
 });
+
+Template.challenge.onRendered(function () {});
 
 Template.challenge.events({
   "keydown .challengeInput"(e) {
@@ -21,36 +23,32 @@ Template.challenge.events({
   },
 
   "keydown .challengeInput"(e) {
-    // console.log(
-    //   "typing ",
-    //   e.originalEvent.key,
-    //   " at position ",
-    //   e.currentTarget.value.length + 1
-    // );
-    // console.log("checking for ", this[e.currentTarget.value.length]);
-
-    if (e.originalEvent.key == this[e.currentTarget.value.length]) {
+    if (e.originalEvent.key == this.theCaptcha[e.currentTarget.value.length]) {
       document.getElementById("challengeStatus").innerHTML = "✅ ";
     } else {
       document.getElementById("challengeStatus").innerHTML = "❎ ";
     }
-
     TotalKeyStrokes.set(TotalKeyStrokes.get() + 1);
   },
 
   "keyup .challengeInput"(e) {
+    console.log("this", this);
     const instance = Template.instance();
-
-    if (!instance.hasInteracted.get()) {
-      startCounter();
-    }
-    captchaLength = this.length;
+    // if (!instance.hasInteracted.get()) {
+    //   startCounter();
+    // }
+    captchaLength = this.theCaptcha.length;
     inputLength = e.currentTarget.value.length;
     if (inputLength >= captchaLength) {
-      if (e.currentTarget.value == this) {
+      if (e.currentTarget.value == this.theCaptcha) {
         e.currentTarget.value = "";
-        index.set(index.get() + 1);
-        TotalCompletedChars.set(TotalCompletedChars.get() + this.length);
+        Index.set(Index.get() + 1);
+        TotalCompletedChars.set(
+          TotalCompletedChars.get() + this.theCaptcha.length
+        );
+        if (this.initialDataLength <= Index.get()) {
+          Captcha1Beaten.set(true);
+        }
       }
     }
   },
@@ -86,10 +84,10 @@ startCounter = function () {
 
 Template.challenge.helpers({
   hider() {
-    if (State.get() != "playing") {
-      return 0;
-    } else {
-      return 1;
-    }
+    // if (State.get() != "playing") {
+    //   return 0;
+    // } else {
+    //   return 1;
+    // }
   },
 });

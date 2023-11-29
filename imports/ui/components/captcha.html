@@ -1,27 +1,34 @@
 <template name="captcha">
-  <svg class="h-[0px] w-[0px]">
-    <defs>
-      <filter id="{{ranId}}">
-        <feTurbulence
-          baseFrequency="0.02 0.1"
-          numOctaves="2"
-          result="noise"
-          seed="{{ranSeed}}"
-        />
-        <feDisplacementMap
-          in="SourceGraphic"
-          in2="noise"
-          scale="10"
-          xChannelSelector="R"
-          yChannelSelector="R"
-        />
-      </filter>
-    </defs>
-  </svg>
   <div
-    class="pointer-events-none absolute scale-[6] select-none font-serif text-2xl text-black"
-    style="filter: url(#{{ranId}})"
+    class="relative mt-6 flex h-[50vh] w-full items-center justify-center rounded-lg border border-indigo-500 bg-white"
   >
-    {{this}}
+    <svg class="h-[0px] w-[0px]">
+      <defs>
+        <filter id="{{ranId}}">
+          <feTurbulence
+            baseFrequency="0.02 0.1"
+            numOctaves="2"
+            result="noise"
+            seed="{{ranSeed}}"
+          />
+          <feDisplacementMap
+            in="SourceGraphic"
+            in2="noise"
+            scale="10"
+            xChannelSelector="R"
+            yChannelSelector="R"
+          />
+        </filter>
+      </defs>
+    </svg>
+    <div
+      class="pointer-events-none absolute scale-[6] select-none font-serif text-2xl text-black"
+      style="filter: url(#{{ranId}})"
+    >
+      {{this}}
+    </div>
+    <div
+      class="absolute left-[25%] top-0 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rotate-45 transform border-l border-t border-indigo-500 bg-white"
+    ></div>
   </div>
 </template>
