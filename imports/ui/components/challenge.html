@@ -1,0 +1,22 @@
+<template name="challenge">
+  <div
+    class="absolute bottom-20 flex h-20 w-full items-center justify-center bg-red-400 pl-6 text-xl transition-opacity duration-1000"
+    style="opacity:{{hider}}"
+  >
+    <div>
+      <span id="challengePrompt" class="select-none">
+        tapez le texte ci-dessus pour continuer :</span
+      >
+      <input
+        class="challengeInput pointer-events-none p-1"
+        type="text"
+        id="challengeInput"
+        onPaste="return false"
+      />
+      <span id="challengeStatus">🤖</span>
+      <span id="challengeTimerSecs" class="font-mono">39</span>
+      <span id="challengeTimerSeparator" class="font-mono">:</span>
+      <span id="challengeTimerDecs" class="font-mono">99</span>
+    </div>
+  </div>
+</template>

@@ -1,0 +1,27 @@
+<template name="captcha">
+  <svg class="h-[0px] w-[0px]">
+    <defs>
+      <filter id="{{ranId}}">
+        <feTurbulence
+          baseFrequency="0.02 0.1"
+          numOctaves="2"
+          result="noise"
+          seed="{{ranSeed}}"
+        />
+        <feDisplacementMap
+          in="SourceGraphic"
+          in2="noise"
+          scale="10"
+          xChannelSelector="R"
+          yChannelSelector="R"
+        />
+      </filter>
+    </defs>
+  </svg>
+  <div
+    class="pointer-events-none scale-[6] select-none font-serif text-2xl"
+    style="filter: url(#{{ranId}})"
+  >
+    {{this}}
+  </div>
+</template>
