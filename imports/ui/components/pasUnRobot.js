@@ -2,6 +2,8 @@ import "./pasUnRobot.html";
 
 export const PasUnRobotBeaten = new ReactiveVar(false);
 
+import { CaptchaBeaten } from "./challenge.js";
+
 Template.pasUnRobot.onCreated(function () {
   this.hasInteracted = new ReactiveVar(false);
 });
@@ -15,6 +17,9 @@ Template.pasUnRobot.onRendered(function () {
 Template.pasUnRobot.helpers({
   hasInteracted() {
     return PasUnRobotBeaten.get();
+  },
+  captchaBeaten() {
+    return CaptchaBeaten.get();
   },
 });
 

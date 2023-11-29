@@ -7,7 +7,7 @@ import "../../api/captchas/captchas.js";
 
 import { PasUnRobotBeaten } from "../components/pasUnRobot.js";
 import { ContinuerBeaten } from "../components/continuer.js";
-import { Captcha1Beaten } from "../components/challenge.js";
+import { CaptchaBeaten } from "../components/challenge.js";
 
 export let Index = new ReactiveVar(0);
 
@@ -29,8 +29,23 @@ Template.level_1.onRendered(function () {
     if (PasUnRobotBeaten.get() == true) {
       instance.state.set("acteII");
     }
-    if (Captcha1Beaten.get() == true) {
-      instance.state.set("acteIII");
+    if (CaptchaBeaten.get() == true) {
+      const fadeElements = ["challenge", "captcha", "pasUnRobot"];
+      const fadeDuration = 1000;
+      // make the animations
+      for (let index = 0; index < fadeElements.length; index++) {
+        setTimeout(() => {
+          document
+            .getElementById(fadeElements[index])
+            .classList.add("opacity-0");
+        }, index * fadeDuration);
+      }
+      document
+        .getElementById("pasUnRobot")
+        .addEventListener("animationend", (event) => {
+          const instance = Template.instance();
+          instance.state.set("acteIII");
+        });
     }
     console.log("state of level 1 ", instance.state.get());
   });

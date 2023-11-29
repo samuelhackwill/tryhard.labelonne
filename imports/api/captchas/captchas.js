@@ -5,11 +5,6 @@ initialData = [
   "coucou hasardeux",
   "salut hypocrite",
   "hi! prudent",
-  "kenavo sardonique",
-  "hola honteux",
-  "sayonara risqué",
-  "shalom audacieux",
-  "habile buongiorno",
 ];
 
 clearData = function () {

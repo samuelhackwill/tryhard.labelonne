@@ -4,7 +4,7 @@ import { Index } from "../layouts/level_1.js";
 
 export const TotalKeyStrokes = new ReactiveVar(0);
 export const TotalCompletedChars = new ReactiveVar(0);
-export const Captcha1Beaten = new ReactiveVar(false);
+export const CaptchaBeaten = new ReactiveVar(false);
 
 Template.challenge.onCreated(function () {
   this.hasInteracted = new ReactiveVar(false);
@@ -36,7 +36,6 @@ Template.challenge.events({
   },
 
   "keyup .challengeInput"(e) {
-    console.log("this", this);
     const instance = Template.instance();
     // if (!instance.hasInteracted.get()) {
     //   startCounter();
@@ -45,13 +44,15 @@ Template.challenge.events({
     inputLength = e.currentTarget.value.length;
     if (inputLength >= captchaLength) {
       if (e.currentTarget.value == this.theCaptcha) {
-        e.currentTarget.value = "";
         Index.set(Index.get() + 1);
+        e.currentTarget.value = "";
         TotalCompletedChars.set(
           TotalCompletedChars.get() + this.theCaptcha.length
         );
         if (this.initialDataLength <= Index.get()) {
-          Captcha1Beaten.set(true);
+          CaptchaBeaten.set(true);
+          Index.set(Index.get() - 1); // lol
+        } else {
         }
       }
     }
