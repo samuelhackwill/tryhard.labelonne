@@ -1,6 +1,25 @@
 // all this stuff is client side
 
-initialData = ["bonjour cryptique"];
+initialData = [
+  "bonjour cryptique",
+  "coucou hasardeux",
+  "salut hypocrite",
+  "hi! prudent",
+  "kenavo sardonique",
+  "hola honteux",
+  "sayonara risqué",
+  "shalom audacieux",
+  "habile buongiorno",
+  "bye définitif",
+  "à bientôt sceptique",
+  "adieu impatient",
+  "ciao apathique",
+  "arrivederci zélé",
+  "take care exagéré",
+  "tot ziens discret",
+  "gruëzi décomplexé",
+  "tschüss implacable",
+];
 
 clearData = function () {
   localStorage.removeItem("visited");
