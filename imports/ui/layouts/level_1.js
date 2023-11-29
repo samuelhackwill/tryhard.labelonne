@@ -1,15 +1,17 @@
 import "./level_1.html";
-import "../components/continuer.js";
-import "../components/pasUnRobot.js";
-import "../components/captcha.js";
-import "../components/challenge.js";
+import "../components/level1/continuer.js";
+import "../components/level1/pasUnRobot.js";
+import "../components/level1/captcha.js";
+import "../components/level1/challenge.js";
 import "../../api/captchas/captchas.js";
 
-import { PasUnRobotBeaten } from "../components/pasUnRobot.js";
-import { ContinuerBeaten } from "../components/continuer.js";
-import { CaptchaBeaten } from "../components/challenge.js";
+import { PasUnRobotBeaten } from "../components/level1/pasUnRobot.js";
+import { ContinuerBeaten } from "../components/level1/continuer.js";
+import { CaptchaBeaten } from "../components/level1/challenge.js";
 
 export let Index = new ReactiveVar(0);
+
+export const Level1Beaten = new ReactiveVar(false);
 
 Template.level_1.onCreated(function () {
   this.state = new ReactiveVar("initial");
@@ -37,17 +39,24 @@ Template.level_1.onRendered(function () {
         setTimeout(() => {
           document
             .getElementById(fadeElements[index])
+            .classList.remove("delay-300");
+
+          document
+            .getElementById(fadeElements[index])
             .classList.add("opacity-0");
-        }, index * fadeDuration);
+        }, (index + 1) * fadeDuration);
       }
       document
         .getElementById("pasUnRobot")
-        .addEventListener("animationend", (event) => {
-          const instance = Template.instance();
-          instance.state.set("acteIII");
+        .addEventListener("transitionend", () => {
+          setTimeout(() => {
+            const instance = Template.instance();
+            console.log("BITE ", Level1Beaten.get());
+            Level1Beaten.set(true);
+            instance.state.set("acteIII");
+          }, 1000);
         });
     }
-    console.log("state of level 1 ", instance.state.get());
   });
 });
 

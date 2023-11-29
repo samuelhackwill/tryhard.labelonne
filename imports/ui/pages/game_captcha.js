@@ -1,7 +1,10 @@
 import "./game_captcha.html";
 import "../layouts/level_1.js";
+import "../layouts/level_2.js";
 
 export let index = new ReactiveVar(0);
+
+import { Level1Beaten } from "../layouts/level_1.js";
 
 Template.game_captcha.onCreated(function () {
   // console.log(
@@ -24,13 +27,8 @@ Template.game_captcha.onCreated(function () {
 });
 
 Template.game_captcha.helpers({
-  theCaptcha() {
-    if (index.get() >= initialData.length) {
-      var aurevoir = aurevoirs.shift();
-      var adjectif = moreAdjectifs.shift();
-      return aurevoir + " " + adjectif;
-    }
-
-    return initialData[index.get()];
+  level1Beaten() {
+    console.log(Level1Beaten.get());
+    return Level1Beaten.get();
   },
 });

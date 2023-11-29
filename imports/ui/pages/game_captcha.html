@@ -1,1 +1,3 @@
-<template name="game_captcha"> {{> level_1}} </template>
+<template name="game_captcha">
+  {{#unless level1Beaten}} {{> level_1}} {{else}} {{> level_2}} {{/unless}}
+</template>

@@ -1,6 +1,6 @@
 import "./challenge.html";
 
-import { Index } from "../layouts/level_1.js";
+import { Index } from "../../layouts/level_1.js";
 
 export const TotalKeyStrokes = new ReactiveVar(0);
 export const TotalCompletedChars = new ReactiveVar(0);

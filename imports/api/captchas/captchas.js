@@ -1,11 +1,6 @@
 // all this stuff is client side
 
-initialData = [
-  "bonjour cryptique",
-  "coucou hasardeux",
-  "salut hypocrite",
-  "hi! prudent",
-];
+initialData = ["bonjour cryptique"];
 
 clearData = function () {
   localStorage.removeItem("visited");
