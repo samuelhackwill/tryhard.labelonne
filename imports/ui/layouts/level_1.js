@@ -71,12 +71,12 @@ Template.level_1.helpers({
     //   var adjectif = moreAdjectifs.shift();
     //   return aurevoir + " " + adjectif;
     // }
-    return initialData[Index.get()];
+    return lvl5Data[Index.get()];
   },
   theCaptchaPlus() {
     return {
-      theCaptcha: initialData[Index.get()],
-      initialDataLength: initialData.length,
+      theCaptcha: lvl5Data[Index.get()],
+      initialDataLength: lvl5Data.length,
     };
   },
 });
