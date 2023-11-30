@@ -28,7 +28,13 @@ Template.game_captcha.onCreated(function () {
 
 Template.game_captcha.helpers({
   level1Beaten() {
-    console.log(ActeIBeaten.get());
     return Acte1Beaten.get();
+  },
+  bgColor() {
+    if (Acte1Beaten.get()) {
+      return "bg-stone-600";
+    } else {
+      return "bg-white";
+    }
   },
 });

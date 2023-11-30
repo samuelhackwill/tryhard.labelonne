@@ -1,3 +1,5 @@
 <template name="game_captcha">
-  {{#unless Acte1Beaten}} {{> acte_1}} {{else}} {{> acte_2}} {{/unless}}
+  <div class="h-screen w-screen transition-colors duration-1000 {{bgColor}}">
+    {{#if level1Beaten}} {{> acte_2}} {{else}} {{> acte_1}} {{/if}}
+  </div>
 </template>

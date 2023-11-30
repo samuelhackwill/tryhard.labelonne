@@ -1,20 +1,18 @@
 <template name="acte_1">
   <!-- beware that formating in here will break the fuken handlebars.
   consider using cmd+k s -->
-  {{#unless isState "terminal"}}
-    <div class="pageContainer flex w-full flex-wrap p-10">
-      <div class="flex h-20 items-center justify-center">
-        {{> continuer theLevel}}
-        {{#unless isState "initial"}}
-          {{> pasUnRobot theLevel}}
-        {{/unless}}
-      </div>
-      {{#if isState "displayCaptcha"}}
-        {{>captcha theCaptchaPlus}}
-        <div class="flex w-full items-center justify-center">
-          {{>challenge theCaptchaPlus}}
-        </div>
-      {{/if}}
+  <div class="pageContainer flex w-full flex-wrap p-10">
+    <div class="flex h-20 items-center justify-center">
+      {{> continuer theLevel}}
+      {{#unless isState "initial"}}
+        {{> pasUnRobot theLevel}}
+      {{/unless}}
     </div>
-  {{/unless}}
+    {{#if isState "displayCaptcha"}}
+      {{>captcha theCaptchaPlus}}
+      <div class="flex w-full items-center justify-center">
+        {{>challenge theCaptchaPlus}}
+      </div>
+    {{/if}}
+  </div>
 </template>

@@ -1,12 +1,15 @@
 <template name="acte_2">
+  <!-- beware that formating in here will break the fuken handlebars.
+  consider using cmd+k s -->
   <div class="pageContainer flex w-full flex-wrap p-10">
     <div class="flex h-20 items-center justify-center">
-      {{> lvl2continuer}} 
-
-      {{#if isBeaten}} 
-        {{> lvl2pasUnRobot}} 
-      {{/if}}
-      
+      {{> continuer theLevel}} {{#unless isState "initial"}} {{> pasUnRobot
+      theLevel}} {{/unless}}
     </div>
-  </div>
-</template>
+    {{#if isState "displayCaptcha"}} {{>captcha theCaptchaPlusLvl2}}
+    <div class="flex w-full items-center justify-center">
+      {{>challenge theCaptchaPlusLvl2}}
+    </div>
+    {{/if}}
+  </div></template
+>

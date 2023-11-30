@@ -58,9 +58,9 @@ Template.acte_1.onRendered(function () {
         .addEventListener("transitionend", () => {
           setTimeout(
             () => {
-              console.log(this);
               // increment level or else terminate act
-              if (instance.level.get() == "5") {
+              if (instance.level.get() > 0) {
+                console.log("ACTE I BEATEN");
                 Acte1Beaten.set(true);
               } else {
                 instance.level.set(instance.level.get() + 1);

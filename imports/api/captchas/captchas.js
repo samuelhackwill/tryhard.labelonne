@@ -73,7 +73,7 @@ lvl3Data = [
   // "o_o",
   // "T_T",
   // "è_é",
-  "en enfin, les touches :",
+  "et enfin, les touches :",
   // lol that one is HARD.
   "   ",
 ];
@@ -99,44 +99,33 @@ lvl4Data = [
 ];
 
 lvl5Data = [
-  "jeu redondant",
-  "public lassé",
-  "expérience pénible",
-  "potache maximal",
-  "clavier collant",
-  "trackpad suant",
-  "pièce froide",
-  "voisin.e hostile",
-  "vidéoprojecteur bruyant",
-  "pseudo participation",
-  "game design défaillant",
-  "dispositif autoritaire",
-  "thématique ?",
-  "y'en a pas",
-  "enfance de samuel ?",
-  "frustrée",
-  "ses lacunes sociales ?",
-  "caractérisées",
-  "son désir d'asservir",
-  "les autres en",
-  "les forçant à jouer ?",
-  "assumé",
-  "ludicité ?",
-  "minimale.",
-  "continuer ?",
-  "s'il le faut",
-  "heureusement",
-  "juste après c'est",
+  // "jeu redondant",
+  // "public lassé",
+  // "expérience pénible",
+  // "potache maximal",
+  // "clavier collant",
+  // "trackpad suant",
+  // "pièce froide",
+  // "voisin.e hostile",
+  // "vidéoprojecteur bruyant",
+  // "pseudo participation",
+  // "game design défaillant",
+  // "dispositif autoritaire",
+  // "thématique ?",
+  // "y'en a pas",
+  // "enfance de samuel ?",
+  // "frustrée",
+  // "ses lacunes sociales ?",
+  // "caractérisées",
+  // "son désir d'asservir",
+  // "les autres en",
+  // "les forçant à jouer ?",
+  // "assumé",
+  // "ludicité ?",
+  // "minimale.",
+  // "continuer ?",
+  // "s'il le faut",
+  // "heureusement",
+  // "juste après c'est",
   "le dernier niveau",
 ];
-
-clearData = function () {
-  localStorage.removeItem("visited");
-};
-
-shuffleArray = function (array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-};

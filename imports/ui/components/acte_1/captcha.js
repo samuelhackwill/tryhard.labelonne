@@ -5,6 +5,7 @@ Template.captcha.helpers({
     return Math.floor(Math.random() * 100);
   },
   ranId() {
+    console.log(this);
     _id = this.theCaptcha.replace(/[ ',;"()]/g, "");
     __id = _id.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     return __id;
