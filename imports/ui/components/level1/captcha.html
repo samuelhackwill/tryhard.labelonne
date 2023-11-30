@@ -26,7 +26,12 @@
       class="pointer-events-none absolute scale-[6] select-none font-serif text-2xl text-black"
       style="filter: url(#{{ranId}})"
     >
-      {{this}}
+      {{#each splittedThis}}
+      <span
+        class="captchaLetter -m-[2.5px] inline-block whitespace-pre transition-transform duration-75"
+        >{{this}}</span
+      >
+      {{/each}}
     </div>
     <div
       class="absolute left-[25%] top-0 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rotate-45 transform border-l border-t border-indigo-500 bg-white"

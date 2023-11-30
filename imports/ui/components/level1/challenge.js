@@ -7,6 +7,7 @@ export const TotalCompletedChars = new ReactiveVar(0);
 export const CaptchaBeaten = new ReactiveVar(false);
 
 Template.challenge.onCreated(function () {
+  this.wrongInput = new ReactiveVar(false);
   this.hasInteracted = new ReactiveVar(false);
 });
 
@@ -27,9 +28,19 @@ Template.challenge.events({
   },
 
   "keydown .challengeInput"(e) {
-    if (e.originalEvent.key == this.theCaptcha[e.currentTarget.value.length]) {
+    const instance = Template.instance();
+
+    if (
+      e.originalEvent.key == this.theCaptcha[e.currentTarget.value.length] &&
+      this.theCaptcha.startsWith(e.currentTarget.value)
+    ) {
+      document
+        .getElementsByClassName("captchaLetter")
+        [e.currentTarget.value.length].classList.add("translate-y-1");
       document.getElementById("challengeStatus").innerHTML = "✅ ";
+      instance.wrongInput.set(false);
     } else {
+      instance.wrongInput.set(true);
       document.getElementById("challengeStatus").innerHTML = "❎ ";
     }
     TotalKeyStrokes.set(TotalKeyStrokes.get() + 1);
@@ -42,6 +53,17 @@ Template.challenge.events({
     // }
     captchaLength = this.theCaptcha.length;
     inputLength = e.currentTarget.value.length;
+
+    console.log("prout", inputLength);
+
+    for (let index = 0; index < inputLength; index++) {
+      setTimeout(() => {
+        document
+          .getElementsByClassName("captchaLetter")
+          [index].classList.remove("translate-y-1");
+      }, 100);
+    }
+
     if (inputLength >= captchaLength) {
       if (e.currentTarget.value == this.theCaptcha) {
         Index.set(Index.get() + 1);
@@ -55,6 +77,14 @@ Template.challenge.events({
         } else {
         }
       }
+    }
+
+    // check if we cleared the fault
+    if (
+      e.originalEvent.key == "Backspace" &&
+      this.theCaptcha.startsWith(e.currentTarget.value)
+    ) {
+      instance.wrongInput.set(false);
     }
   },
 });
@@ -94,5 +124,13 @@ Template.challenge.helpers({
     // } else {
     //   return 1;
     // }
+  },
+  wrongInput() {
+    const instance = Template.instance();
+    instance.wrongInput.get();
+    if (instance.wrongInput.get() == true) {
+      return "bg-red-300";
+    }
+    return;
   },
 });
