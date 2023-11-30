@@ -57,10 +57,10 @@ Template.challenge.events({
     console.log("prout", inputLength);
 
     for (let index = 0; index < inputLength; index++) {
-      setTimeout(() => {
+      removeLetterAnimation = setTimeout(function () {
         document
           .getElementsByClassName("captchaLetter")
-          [index].classList.remove("translate-y-1");
+          [index]?.classList.remove("translate-y-1");
       }, 100);
     }
 
