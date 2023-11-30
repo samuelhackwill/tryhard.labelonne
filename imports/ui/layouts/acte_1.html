@@ -4,25 +4,17 @@
   {{#unless isState "terminal"}}
     <div class="pageContainer flex w-full flex-wrap p-10">
       <div class="flex h-20 items-center justify-center">
-        {{> continuer}}
+        {{> continuer theLevel}}
         {{#unless isState "initial"}}
-          {{> pasUnRobot}}
+          {{> pasUnRobot theLevel}}
         {{/unless}}
       </div>
       {{#if isState "displayCaptcha"}}
-        {{>captcha theCaptcha}}
+        {{>captcha theCaptchaPlus}}
         <div class="flex w-full items-center justify-center">
           {{>challenge theCaptchaPlus}}
         </div>
       {{/if}}
     </div>
   {{/unless}}
-
-  {{#if isState "terminal"}}
-    <div class="pageContainer flex w-full flex-wrap p-10">
-      <div class="flex h-20 items-center justify-center">
-        {{> continuer}}
-      </div>
-    </div>
-  {{/if}}
 </template>

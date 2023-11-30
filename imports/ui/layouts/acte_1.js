@@ -97,7 +97,12 @@ Template.acte_1.helpers({
     return {
       theCaptcha: window[name][Index.get()],
       initialDataLength: window[name].length,
+      theLevel: instance.level.get(),
     };
+  },
+  theLevel() {
+    const instance = Template.instance();
+    return instance.level.get();
   },
 });
 

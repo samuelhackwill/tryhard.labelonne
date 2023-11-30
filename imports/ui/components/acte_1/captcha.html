@@ -1,7 +1,7 @@
 <template name="captcha">
   <div
     id="captcha"
-    class="relative mt-6 flex h-[50vh] w-full items-center justify-center rounded-lg border border-indigo-500 bg-white opacity-0 transition-opacity duration-300"
+    class="relative mt-6 flex h-[50vh] w-full items-center justify-center rounded-lg border {{levelColor this}} bg-white opacity-0 transition-opacity duration-300"
   >
     <svg class="h-[0px] w-[0px]">
       <defs>
@@ -34,7 +34,7 @@
       {{/each}}
     </div>
     <div
-      class="absolute left-[25%] top-0 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rotate-45 transform border-l border-t border-indigo-500 bg-white"
+      class="absolute left-[25%] top-0 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rotate-45 transform border-l border-t {{levelColor this}} bg-white"
     ></div>
   </div>
 </template>

@@ -1,7 +1,7 @@
 <template name="challenge">
   <div
     id="challenge"
-    class="relative mt-6 flex h-20 w-fit items-center justify-start rounded-lg border border-indigo-500 bg-white opacity-0 transition-opacity delay-300 duration-300"
+    class="relative mt-6 flex h-20 w-fit items-center justify-start rounded-lg border {{levelColor this}} bg-white opacity-0 transition-opacity delay-300 duration-300"
     style="opacity:{{hider}}"
     autocomplete="off"
   >
@@ -22,7 +22,7 @@
       <span id="challengeTimerDecs" class="font-mono">99</span> -->
     </div>
     <div
-      class="absolute left-[50%] top-0 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rotate-45 transform border-l border-t border-indigo-500 bg-white"
+      class="absolute left-[50%] top-0 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rotate-45 transform border-l border-t {{levelColor this}} bg-white"
     ></div>
   </div>
 </template>

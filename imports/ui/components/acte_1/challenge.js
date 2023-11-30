@@ -133,4 +133,19 @@ Template.challenge.helpers({
     }
     return;
   },
+  levelColor(obj) {
+    output = {
+      1: "border-blue-500",
+      2: "border-orange-500",
+      3: "border-stone-500",
+      4: "border-lime-500",
+      5: "border-purple-500",
+    };
+    return output[obj.theLevel];
+
+    // bg-blue-600
+    // hover:bg-blue-800
+    // active:ring-blue-300
+    // text-white
+  },
 });
