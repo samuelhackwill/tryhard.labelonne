@@ -1,7 +1,12 @@
-<template name="level_2">
+<template name="acte_2">
   <div class="pageContainer flex w-full flex-wrap p-10">
     <div class="flex h-20 items-center justify-center">
-      {{> lvl2continuer}} {{#if isBeaten}} {{> lvl2pasUnRobot}} {{/if}}
+      {{> lvl2continuer}} 
+
+      {{#if isBeaten}} 
+        {{> lvl2pasUnRobot}} 
+      {{/if}}
+      
     </div>
   </div>
 </template>

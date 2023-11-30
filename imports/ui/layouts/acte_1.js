@@ -1,35 +1,42 @@
-import "./level_1.html";
-import "../components/level1/continuer.js";
-import "../components/level1/pasUnRobot.js";
-import "../components/level1/captcha.js";
-import "../components/level1/challenge.js";
+import "./acte_1.html";
+import "../components/acte_1/continuer.js";
+import "../components/acte_1/pasUnRobot.js";
+import "../components/acte_1/captcha.js";
+import "../components/acte_1/challenge.js";
 import "../../api/captchas/captchas.js";
 
-import { PasUnRobotBeaten } from "../components/level1/pasUnRobot.js";
-import { ContinuerBeaten } from "../components/level1/continuer.js";
-import { CaptchaBeaten } from "../components/level1/challenge.js";
+import { PasUnRobotBeaten } from "../components/acte_1/pasUnRobot.js";
+import { ContinuerBeaten } from "../components/acte_1/continuer.js";
+import { CaptchaBeaten } from "../components/acte_1/challenge.js";
 
 export let Index = new ReactiveVar(0);
 
-export const Level1Beaten = new ReactiveVar(false);
+export const ActeIBeaten = new ReactiveVar(false);
 
-Template.level_1.onCreated(function () {
+Template.acte_1.onCreated(function () {
   this.state = new ReactiveVar("initial");
   // one of
   // > initial
-  // > acteI
-  // > acteII
-  // > acteIII
+  // > displayPasUnRobot
+  // > displayCaptcha
+  // > terminal
+  this.level = new ReactiveVar(1);
+  // one of
+  // 1
+  // 2
+  // 3
+  // 4
+  // 5
 });
 
-Template.level_1.onRendered(function () {
+Template.acte_1.onRendered(function () {
   const instance = Template.instance();
   Tracker.autorun(() => {
     if (ContinuerBeaten.get() == true) {
-      instance.state.set("acteI");
+      instance.state.set("dispalyPasUnRobot");
     }
     if (PasUnRobotBeaten.get() == true) {
-      instance.state.set("acteII");
+      instance.state.set("displayCaptcha");
     }
     if (CaptchaBeaten.get() == true) {
       const fadeElements = ["challenge", "captcha", "pasUnRobot"];
@@ -51,40 +58,35 @@ Template.level_1.onRendered(function () {
         .addEventListener("transitionend", () => {
           setTimeout(() => {
             const instance = Template.instance();
-            console.log("BITE ", Level1Beaten.get());
-            Level1Beaten.set(true);
-            instance.state.set("acteIII");
+            console.log("BITE ", Acte1Beaten.get());
+            Acte1Beaten.set(true);
+            instance.state.set("terminal");
           }, 1000);
         });
     }
   });
 });
 
-Template.level_1.helpers({
+Template.acte_1.helpers({
   isState(name) {
     const instance = Template.instance();
     return instance.state.get() == name;
   },
   theCaptcha() {
-    // if (Index.get() >= initialData.length) {
-    //   var aurevoir = aurevoirs.shift();
-    //   var adjectif = moreAdjectifs.shift();
-    //   return aurevoir + " " + adjectif;
-    // }
-    return lvl5Data[Index.get()];
+    return lvl1Data[Index.get()];
   },
   theCaptchaPlus() {
     return {
-      theCaptcha: lvl5Data[Index.get()],
-      initialDataLength: lvl5Data.length,
+      theCaptcha: lvl1Data[Index.get()],
+      initialDataLength: lvl1Data.length,
     };
   },
 });
 
-Template.level_1.events({
+Template.acte_1.events({
   "click .pageContainer"() {
     const instance = Template.instance();
-    if (instance.state.get() == "acteII") {
+    if (instance.state.get() == "displayCaptcha") {
       document.getElementsByClassName("challengeInput")[0].focus();
     } else {
       return;

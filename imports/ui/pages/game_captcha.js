@@ -1,10 +1,10 @@
 import "./game_captcha.html";
-import "../layouts/level_1.js";
-import "../layouts/level_2.js";
+import "../layouts/acte_1.js";
+import "../layouts/acte_2.js";
 
 export let index = new ReactiveVar(0);
 
-import { Level1Beaten } from "../layouts/level_1.js";
+import { Acte1Beaten } from "../layouts/acte_1.js";
 
 Template.game_captcha.onCreated(function () {
   // console.log(
@@ -28,7 +28,7 @@ Template.game_captcha.onCreated(function () {
 
 Template.game_captcha.helpers({
   level1Beaten() {
-    console.log(Level1Beaten.get());
-    return Level1Beaten.get();
+    console.log(ActeIBeaten.get());
+    return Acte1Beaten.get();
   },
 });
