@@ -5,11 +5,16 @@ import "../components/acte_1/pasUnRobot.js";
 import "../components/acte_1/captcha.js";
 import "../components/acte_1/challenge.js";
 
+import "../components/acte_2/timer.js";
+import "../components/acte_2/healthPoints.js";
+
 import "../../api/captchas/captchasII.js";
 
 import { PasUnRobotBeaten } from "../components/acte_1/pasUnRobot.js";
 import { ContinuerBeaten } from "../components/acte_1/continuer.js";
-import { CaptchaBeaten } from "../components/acte_1/challenge.js";
+import { CaptchaBeaten } from "../components/acte_2/healthPoints.js";
+import { HealthPoints } from "../components/acte_2/healthPoints.js";
+import { Dead } from "../components/acte_2/timer.js";
 
 export let Index = new ReactiveVar(0);
 
@@ -40,9 +45,15 @@ Template.acte_2.onRendered(function () {
     if (PasUnRobotBeaten.get() == true) {
       instance.state.set("displayCaptcha");
     }
-    if (CaptchaBeaten.get() == true) {
-      const fadeElements = ["challenge", "captcha", "pasUnRobot"];
-      const fadeDuration = 1000;
+    if (CaptchaBeaten.get() == true || Dead.get() == true) {
+      const fadeElements = [
+        "timer",
+        "healthPoints",
+        "challenge",
+        "captcha",
+        "pasUnRobot",
+      ];
+      const fadeDuration = 500;
       // make the animations
       for (let index = 0; index < fadeElements.length; index++) {
         setTimeout(() => {
@@ -60,11 +71,16 @@ Template.acte_2.onRendered(function () {
         .addEventListener("transitionend", () => {
           setTimeout(
             () => {
-              // increment level or else terminate act
-              if (instance.level.get() > 1) {
-                Acte2Beaten.set(true);
+              if (HealthPoints.get() == 0) {
+                console.log("EHUUHUU");
+                HealthPoints.set(3);
               } else {
-                instance.level.set(instance.level.get() + 1);
+                // increment level or else terminate act
+                if (instance.level.get() > 1) {
+                  Acte2Beaten.set(true);
+                } else {
+                  instance.level.set(instance.level.get() + 1);
+                }
               }
 
               // reinitialize components state
@@ -90,18 +106,16 @@ Template.acte_2.helpers({
   theCaptchaLvl2() {
     const instance = Template.instance();
     const name = "lvl" + instance.level.get() + "DataII";
-    console.log(name, Index.get());
     return window[name][Index.get()];
   },
   theCaptchaPlusLvl2() {
     const instance = Template.instance();
     const name = "lvl" + instance.level.get() + "DataII";
-    console.log(name, Index.get());
-    console.log(lvl1DataII[Index.get()]);
     return {
       theCaptcha: window[name][Index.get()],
       initialDataLength: window[name].length,
       theLevel: instance.level.get(),
+      theActe: 2,
     };
   },
   theLevel() {

@@ -1,12 +1,12 @@
-<template name="timer">
+<template name="healthPoints">
   <div
-    id="timer"
+    id="healthPoints"
     class="relative mt-6 px-6 flex h-20 w-fit items-center justify-start rounded-lg border {{levelColor this}} bg-white opacity-0 transition-opacity delay-300 duration-300"
     style="opacity:{{hider}}"
   >
-    <span id="challengeTimerSecs" class="font-mono">10</span>
-    <span id="challengeTimerSeparator" class="font-mono">:</span>
-    <span id="challengeTimerDecs" class="font-mono">99</span>
+    vies : {{#each hps}}
+    <p class="ml-3 text-4xl">{{this}}</p>
+    {{/each}}
 
     <div
       class="absolute left-0 top-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rotate-45 transform border-b border-l {{levelColor this}} bg-white"

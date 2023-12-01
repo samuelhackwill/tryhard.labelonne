@@ -6,6 +6,8 @@ export const TotalKeyStrokes = new ReactiveVar(0);
 export const TotalCompletedChars = new ReactiveVar(0);
 export const CaptchaBeaten = new ReactiveVar(false);
 
+let isDamageable = true;
+
 Template.challenge.onCreated(function () {
   this.wrongInput = new ReactiveVar(false);
   this.hasInteracted = new ReactiveVar(false);
@@ -19,16 +21,18 @@ Template.challenge.onRendered(function () {
 
 Template.challenge.events({
   "keydown .challengeInput"(e) {
-    keyPress = e.originalEvent.key;
-    if (keyPress.startsWith("Arrow")) {
-      e.preventDefault();
-      console.log(keyPress);
+    const instance = Template.instance();
+
+    dontValidate = ["Shift", "Enter", "Dead", "Escape", "Backspace"];
+    if (dontValidate.includes(e.originalEvent.key)) {
       return;
     }
-  },
 
-  "keydown .challengeInput"(e) {
-    const instance = Template.instance();
+    // console.log(instance.lastKeyPress, e.originalEvent.key);
+
+    // if (instance.lastKeyPress == "Dead") {
+    //   console.log("holy shit that's a trema, don't validate!");
+    // }
 
     if (
       e.originalEvent.key == this.theCaptcha[e.currentTarget.value.length] &&
@@ -37,26 +41,38 @@ Template.challenge.events({
       document
         .getElementsByClassName("captchaLetter")
         [e.currentTarget.value.length].classList.add("translate-y-1");
-      document.getElementById("challengeStatus").innerHTML = "✅ ";
+      // document.getElementById("challengeStatus").innerHTML = "✅";
       instance.wrongInput.set(false);
+      isDamageable = true;
     } else {
       instance.wrongInput.set(true);
-      document.getElementById("challengeStatus").innerHTML = "❎ ";
+      if (this.theActe == 2 && isDamageable) {
+        dealDamage(1, Index.get());
+      }
+      isDamageable = false;
+      // document.getElementById("challengeStatus").innerHTML = "❎";
     }
     TotalKeyStrokes.set(TotalKeyStrokes.get() + 1);
   },
 
   "keyup .challengeInput"(e) {
+    // getting template context
     const instance = Template.instance();
-    // if (!instance.hasInteracted.get()) {
-    //   startCounter();
-    // }
+
+    // we don't want to start the timer twice
+    if (!instance.hasInteracted.get() && this.theActe == 2) {
+      console.log("start counter");
+      startCounter();
+    }
+
+    instance.hasInteracted.set(true);
+
+    // we need to compare how much of the captcha
+    // we've already typed with the captcha's length
     captchaLength = this.theCaptcha.length;
     inputLength = e.currentTarget.value.length;
-
-    console.log("prout", inputLength);
-
     for (let index = 0; index < inputLength; index++) {
+      // animation
       removeLetterAnimation = setTimeout(function () {
         document
           .getElementsByClassName("captchaLetter")
@@ -66,15 +82,19 @@ Template.challenge.events({
 
     if (inputLength >= captchaLength) {
       if (e.currentTarget.value == this.theCaptcha) {
+        // word finished
+        if (this.theActe == 2) {
+          timerAddTime();
+        }
         Index.set(Index.get() + 1);
         e.currentTarget.value = "";
         TotalCompletedChars.set(
           TotalCompletedChars.get() + this.theCaptcha.length
         );
         if (this.initialDataLength <= Index.get()) {
+          // all words finished
           CaptchaBeaten.set(true);
           Index.set(Index.get() - 1); // lol
-        } else {
         }
       }
     }
@@ -88,34 +108,6 @@ Template.challenge.events({
     }
   },
 });
-
-startCounter = function () {
-  const instance = Template.instance();
-
-  instance.hasInteracted.set(true);
-
-  timer = setInterval(function () {
-    decs = document.getElementById("challengeTimerDecs").innerHTML;
-    decCount = Number(decs) - 1;
-    if (decCount < 1) {
-      decCount = 99;
-      secs = document.getElementById("challengeTimerSecs").innerHTML;
-      secCount = Number(secs) - 1;
-      if (secCount < 0) {
-        clearInterval(timer);
-        State.set("loggingScore");
-        document.getElementById("challengeInput").value = "";
-        document.getElementById("challengeTimerSecs").innerHTML = "00";
-        document.getElementById("challengeTimerDecs").innerHTML = "00";
-        return;
-      }
-      newSecs = String(secCount).padStart(2, "0");
-      document.getElementById("challengeTimerSecs").innerHTML = newSecs;
-    }
-    newDecs = String(decCount).padStart(2, "0");
-    document.getElementById("challengeTimerDecs").innerHTML = newDecs;
-  }, 10);
-};
 
 Template.challenge.helpers({
   hider() {

@@ -7,8 +7,8 @@
       theLevel}} {{/unless}}
     </div>
     {{#if isState "displayCaptcha"}} {{>captcha theCaptchaPlusLvl2}}
-    <div class="flex w-full items-center justify-center">
-      {{>challenge theCaptchaPlusLvl2}}
+    <div class="flex w-full items-center justify-center gap-6">
+      {{>challenge theCaptchaPlusLvl2}} {{>healthPoints}} {{>timer}}
     </div>
     {{/if}}
   </div></template

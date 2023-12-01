@@ -1,22 +1,22 @@
 <template name="challenge">
   <div
     id="challenge"
-    class="relative mt-6 flex h-20 w-fit items-center justify-start rounded-lg border {{levelColor this}} bg-white opacity-0 transition-opacity delay-300 duration-300"
+    class="{{levelColor this}} relative mt-6 flex h-20 w-fit items-center justify-start rounded-lg border  bg-white opacity-0 transition-opacity delay-300 duration-300"
     style="opacity:{{hider}}"
-    autocomplete="off"
   >
     <div class="p-6">
       <span id="challengePrompt" class="select-none text-xl">
         tapez le texte ci-dessus pour continuer :</span
       >
       <input
-        class="challengeInput pointer-events-none ml-2 rounded-md p-1 text-xl {{wrongInput}} transition-colors"
-        type="text"
         id="challengeInput"
+        class="challengeInput  {{levelColor this}} {{wrongInput}}  pointer-events-none ml-2 border rounded-md p-1 text-xl transition-colors"
+        type="text"
         onPaste="return false"
         autofocus
+        autocomplete="off"
       />
-      <span id="challengeStatus">🤖</span>
+      <!-- <span id="challengeStatus">✅</span> -->
       <!-- <span id="challengeTimerSecs" class="font-mono">39</span>
       <span id="challengeTimerSeparator" class="font-mono">:</span>
       <span id="challengeTimerDecs" class="font-mono">99</span> -->

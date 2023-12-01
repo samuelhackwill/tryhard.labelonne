@@ -1,5 +1,7 @@
 lvl1DataII = [
-  "ACTE TWO HERE",
+  "acte II ici",
+  "acte II",
+  "act",
   // "coucou hasardeux",
   // "hi! hypocrite",
   // "kenavo sardonique",
