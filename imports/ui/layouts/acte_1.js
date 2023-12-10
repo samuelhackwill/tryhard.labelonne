@@ -59,7 +59,7 @@ Template.acte_1.onRendered(function () {
           setTimeout(
             () => {
               // increment level or else terminate act
-              if (instance.level.get() > 0) {
+              if (instance.level.get() > 4) {
                 console.log("ACTE I BEATEN");
                 Acte1Beaten.set(true);
               } else {

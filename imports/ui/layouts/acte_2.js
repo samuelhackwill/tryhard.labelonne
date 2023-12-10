@@ -72,7 +72,6 @@ Template.acte_2.onRendered(function () {
           setTimeout(
             () => {
               if (HealthPoints.get() == 0) {
-                console.log("EHUUHUU");
                 HealthPoints.set(3);
               } else {
                 // increment level or else terminate act

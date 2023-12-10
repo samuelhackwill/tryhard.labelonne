@@ -7,7 +7,7 @@
       class="relative ml-3 flex w-fit rounded-lg border {{levelColor this}} bg-white p-6"
     >
       <div class="flex items-center justify-center text-sm text-gray-800">
-        {{#if hasInteracted}} {{#if captchaBeaten}}
+        {{#unless isItActeII}} {{#if hasInteracted}} {{#if captchaBeaten}}
         <input
           checked
           id="pasUnRobot"
@@ -41,12 +41,17 @@
           value=""
           class="m-2 h-6 w-6 rounded border-gray-300 bg-gray-100 text-red-600 focus:ring-2 focus:ring-red-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-red-600"
         />
-        {{/if}}
-
+        {{/if}} {{/unless}}
         <div class="ml-3 inline-block text-xl">
-          Je ne suis pas un robot {{#if showLevel}}
+          {{#if isItActeII}}
+          <span>
+            merci beaucoup! c'est tout ce que je peux vous montrer de
+            <span class="italic"> ce </span>jeu ce soir. Samuel va prendre la
+            parole là normalement si tout va bien.
+          </span>
+          {{else}} Je ne suis pas un robot {{#if showLevel}}
           <span class="italic">( Niveau {{this}} )</span>
-          {{/if}}
+          {{/if}} {{/if}}
         </div>
         <div
           class="absolute left-0 top-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rotate-45 transform border-b border-l {{levelColor this}} bg-white"

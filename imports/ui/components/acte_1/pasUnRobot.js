@@ -4,6 +4,8 @@ export const PasUnRobotBeaten = new ReactiveVar(false);
 
 import { CaptchaBeaten } from "./challenge.js";
 
+import { Acte1Beaten } from "../../layouts/acte_1.js";
+
 Template.pasUnRobot.onCreated(function () {
   this.hasInteracted = new ReactiveVar(false);
 });
@@ -15,6 +17,9 @@ Template.pasUnRobot.onRendered(function () {
 });
 
 Template.pasUnRobot.helpers({
+  isItActeII() {
+    return Acte1Beaten.get();
+  },
   hasInteracted() {
     return PasUnRobotBeaten.get();
   },

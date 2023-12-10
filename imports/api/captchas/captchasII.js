@@ -1,22 +1,4 @@
-lvl1DataII = [
-  "acte II ici",
-  "acte II",
-  "act",
-  // "coucou hasardeux",
-  // "hi! hypocrite",
-  // "kenavo sardonique",
-  // "sayonara risqué",
-  // "shalom audacieux",
-  // "habile buongiorno",
-  // "à bientôt sceptique",
-  // "adieu impatient",
-  // "ciao apathique",
-  // "arrivederci zélé",
-  // "take care exagéré",
-  // "tot ziens discret",
-  // "gruezi décomplexé",
-  // "tschuss implacable",
-];
+lvl1DataII = ["dadadi"];
 
 clearData = function () {
   localStorage.removeItem("visited");

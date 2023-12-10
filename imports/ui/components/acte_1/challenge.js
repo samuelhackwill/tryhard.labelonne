@@ -16,6 +16,7 @@ Template.challenge.onCreated(function () {
 Template.challenge.onRendered(function () {
   setTimeout(() => {
     document.getElementById("challenge").classList.remove("opacity-0");
+    document.getElementById("challengeInput").focus();
   }, 50);
 });
 
@@ -86,15 +87,16 @@ Template.challenge.events({
         if (this.theActe == 2) {
           timerAddTime();
         }
-        Index.set(Index.get() + 1);
         e.currentTarget.value = "";
         TotalCompletedChars.set(
           TotalCompletedChars.get() + this.theCaptcha.length
         );
-        if (this.initialDataLength <= Index.get()) {
+        if (Index.get() >= Number(this.initialDataLength) - 1) {
           // all words finished
           CaptchaBeaten.set(true);
-          Index.set(Index.get() - 1); // lol
+        } else {
+          console.log("INDEXING ", Index.get());
+          Index.set(Index.get() + 1);
         }
       }
     }
