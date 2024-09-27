@@ -6,6 +6,17 @@ Meteor.startup(() => {
   // code to run on server at startup
 });
 
+const description =
+  "Une série de 5 niveaux de captchas textuels à compléter. Pas d'enjeux de compétition, il faut juste taper le texte comme il vient. Les gens ont dit : ça va c'était sympa mais maintenant il faut juste écrire un texte qui a du sens lol.";
+
+WebApp.connectHandlers.use("/api/hello", (req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*"); // Allow all origins (use specific domains for more security)
+  res.setHeader("Content-Type", "text/plain");
+
+  res.write(description);
+  res.end();
+});
+
 // SEO BELOW
 // making routes and building headers for crawlers & bots.
 
